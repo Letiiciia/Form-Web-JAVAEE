@@ -22,7 +22,7 @@
             <legend>CADASTRO</legend>
             <img id="img-java" src="img/java.png" alt="imagem java">
             <label for="nome">Nome Completo:</label>
-            <input class="larguraTexto" type="text" id="nome" name="nome-completo"
+            <input class="larguraTexto" type="text" id="nome" name="nomecompleto"
                 placeholder="Digite seu nome completo">
             <label for="telefone">Telefone:</label>
             <input class="larguraTexto" type="text" placeholder="(61)9.9999-9999" name="telefone">

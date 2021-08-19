@@ -27,7 +27,7 @@
 		</tr>
 		<%while(rs.next()){ %>
 		<tr>
-			<td><%System.out.print(rs.getString("nomecompleto")); %></td>
+			<td><%out.print(rs.getString("nomecompleto")); %></td>
 			<td><%out.print(rs.getString("email")); %></td>
 		</tr>	
 		<% } %>
