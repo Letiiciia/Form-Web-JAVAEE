@@ -23,8 +23,8 @@ public class PessoaDao {
 
 			String sql = "insert into pessoas (nomecompleto, telefone, datanascimento, email, sexo, tecnologia, escolaridade)"
 					+ "values('" + objP.getNome() + "', '" + objP.getTelefone() + "', '" + objP.getDataNascimento()
-					+ "', '" + objP.getEmail() + "', '" + objP.getSexo() + "', '" + lsTecnologia + "', ' ');";
-			System.out.println(sql);
+					+ "', '" + objP.getEmail() + "', '" + objP.getSexo() + "', '" + lsTecnologia + "', '" + objP.getEscolaridade() + "') ;";
+			
 			PreparedStatement pst = cont.prepareStatement(sql);
 			pst.execute();
 			pst.close();
@@ -43,12 +43,13 @@ public class PessoaDao {
 
 		try {
 			Connection cont = Conexao.conectar();
-			PreparedStatement pst = cont.prepareStatement("select nomecompleto, email from pessoas");
+			PreparedStatement pst = cont.prepareStatement("select * from pessoas order by id");
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				Pessoa p = new Pessoa();
 				p.setNome(rs.getString("nomecompleto"));
 				p.setEmail(rs.getString("email"));
+				p.setId(rs.getInt("id"));
 				ls.add(p);
 			}
 			cont.close();
@@ -57,5 +58,89 @@ public class PessoaDao {
 		}
 
 		return ls;
+	}
+
+	public Pessoa getPessoa(int id) {
+		Pessoa p = new Pessoa();
+		try {
+			Connection cont = Conexao.conectar();
+			PreparedStatement pst = cont.prepareStatement("select * from pessoas where id = ? ");
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+
+				p.setNome(rs.getString("nomecompleto"));
+				p.setEmail(rs.getString("email"));
+				p.setId(rs.getInt("id"));
+				p.setTelefone(rs.getString("telefone"));
+				p.setDataNascimento(rs.getString("datanascimento"));
+				p.setTecnologia(rs.getString("tecnologia").split(","));
+				p.setEscolaridade(rs.getString("escolaridade"));
+				p.setSexo(rs.getString("sexo"));
+			}
+			cont.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	public boolean alterar(Pessoa objP) {
+		String lsTecnologia = "";
+		for (String t : objP.getTecnologia()) {
+			lsTecnologia += t + ",";
+		}
+
+		try {
+			// Conexao c = new Conexao(); // instancia da classe Conexao
+			Connection cont = Conexao.conectar(); // metodo de conexao ao banco
+
+			String sql = " update pessoas set " + "nomecompleto   = ?," + "telefone        = ?,"
+					+ "datanascimento   = ?," + "email           = ?," + "sexo            = ?," + "tecnologia      = ?,"
+					+ "escolaridade    = ?" + "where " + "id				= ?";
+
+			PreparedStatement pst = cont.prepareStatement(sql);
+			pst.setString(1, objP.getNome());
+			pst.setString(2, objP.getTelefone());
+			pst.setString(3, objP.getDataNascimento());
+			pst.setString(4, objP.getEmail());
+			pst.setString(5, objP.getSexo());
+			pst.setString(6, lsTecnologia);
+			pst.setString(7, objP.getEscolaridade());
+			pst.setInt(8, objP.getId());
+
+			pst.execute();
+			pst.close();
+			cont.close();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	public boolean apagar(int id) {
+		
+		try {
+			// Conexao c = new Conexao(); // instancia da classe Conexao
+			Connection cont = Conexao.conectar(); // metodo de conexao ao banco
+
+			String sql = "delete from pessoas where id = ?";
+
+			PreparedStatement pst = cont.prepareStatement(sql);
+			pst.setInt(1, id);
+
+			pst.execute();
+			pst.close();
+			cont.close();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 }

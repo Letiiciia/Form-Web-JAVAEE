@@ -23,20 +23,22 @@
 
 	<table>
 		<tr>
+			<th>ID</th>
 			<th>Nome</th>
 			<th>Email</th>
+			<th>Ação</th>
+			
 		</tr>
 		<%
 		for(Pessoa p : ls){
 			
 		%>
 		<tr>
-			<td>
-				<%=p.getNome()%>
-			</td>
-			<td>
-				<%=p.getEmail()%>
-			</td>
+			<td><%=p.getId() %></td>
+			<td><%=p.getNome()%></td>
+			<td><%=p.getEmail()%></td>
+			<td><a href="formCadastro.jsp?id=<%=p.getId() %>">Editar</a></td>
+			<td><a href="cadastroServlet?id=<%=p.getId() %>">Apagar</a></td>
 		</tr>
 		<%
 		}

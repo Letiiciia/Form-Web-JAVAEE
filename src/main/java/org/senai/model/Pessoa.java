@@ -3,13 +3,14 @@ package org.senai.model;
 public class Pessoa {
 	
 	private int id;
-	private String nome;
-	private String telefone;
-	private String dataNascimento;
-	private String email;
-	private String sexo;
-	private String[] tecnologia;
-	private String escolaridade;
+	private String nome = "";
+	private String telefone = "";
+	private String dataNascimento = "";
+	private String email = "";
+	private String sexo = "";
+	private String[] tecnologia = {""};
+	private String escolaridade = "";
+	
 	public int getId() {
 		return id;
 	}
@@ -49,8 +50,8 @@ public class Pessoa {
 	public String[] getTecnologia() {
 		return tecnologia;
 	}
-	public void setTecnologia(String[] tecnologia) {
-		this.tecnologia = tecnologia;
+	public void setTecnologia(String[] strings) {
+		this.tecnologia = strings;
 	}
 	public String getEscolaridade() {
 		return escolaridade;

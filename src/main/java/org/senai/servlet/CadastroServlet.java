@@ -1,4 +1,5 @@
 package org.senai.servlet;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -9,33 +10,51 @@ import javax.servlet.http.HttpServletResponse;
 import org.senai.dao.PessoaDao;
 import org.senai.model.Pessoa;
 
-
-
 @WebServlet("/cadastroServlet")
 public class CadastroServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
+
 		Pessoa objP = new Pessoa();
-		
-		objP.setNome(req.getParameter("nomecompleto"));
-		objP.setTelefone(req.getParameter("telefone")); 
-		objP.setDataNascimento(req.getParameter("datanascimento"));
-		objP.setEmail(req.getParameter("email"));
-		objP.setSexo(req.getParameter("sexo"));
-		objP.setTecnologia(req.getParameterValues("tecnologia"));
-		objP.setEscolaridade(req.getParameter("escolaridade"));
+
+		String acao = req.getParameter("acao");
+
+		if (acao != null && acao.equals("apagar")) {
+			objP.setId(Integer.parseInt(req.getParameter("id")));
+		} else {
+			objP.setNome(req.getParameter("nomecompleto"));
+			objP.setTelefone(req.getParameter("telefone"));
+			objP.setDataNascimento(req.getParameter("datanascimento"));
+			objP.setEmail(req.getParameter("email"));
+			objP.setSexo(req.getParameter("sexo"));
+			objP.setTecnologia(req.getParameterValues("tecnologia"));
+			objP.setEscolaridade(req.getParameter("escolaridade"));
+			objP.setId(Integer.parseInt(req.getParameter("id")));
+		}
 
 		PessoaDao objDao = new PessoaDao();
-		objDao.adicionar(objP);
-		if(objDao.adicionar(objP)) {
-			res.sendRedirect("listarPessoas.jsp");
-		}else {
+
+		boolean validar = false;
+
+		if (objP.getId() > 0) {
+			if (acao != null && acao.equals("apagar")) {
+				validar = objDao.apagar(objP.getId());
+			} else {
+				validar = objDao.alterar(objP);
+			}
+
+		} else {
+			validar = objDao.adicionar(objP);
+
+		}
+
+		if (validar) {
+			res.sendRedirect("formCadastro.jsp");
+		} else {
 			PrintWriter saida = res.getWriter();
 			saida.println("<html>");
 			saida.println("Erro ao gravar dados");
 			saida.println("</html>");
 		}
-		
 	}
 
 }
