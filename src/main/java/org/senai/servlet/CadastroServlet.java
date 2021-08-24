@@ -48,7 +48,7 @@ public class CadastroServlet extends HttpServlet {
 		}
 
 		if (validar) {
-			res.sendRedirect("formCadastro.jsp");
+			res.sendRedirect("listarPessoas.jsp");
 		} else {
 			PrintWriter saida = res.getWriter();
 			saida.println("<html>");

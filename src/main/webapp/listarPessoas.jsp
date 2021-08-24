@@ -38,7 +38,7 @@
 			<td><%=p.getNome()%></td>
 			<td><%=p.getEmail()%></td>
 			<td><a href="formCadastro.jsp?id=<%=p.getId() %>">Editar</a></td>
-			<td><a href="cadastroServlet?id=<%=p.getId() %>">Apagar</a></td>
+			<td><a href="cadastroServlet?acao=apagar&id=<%=p.getId() %>">Apagar</a></td>
 		</tr>
 		<%
 		}
