@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Primeira Página JSP</h1>
-
+<p><a href="menu.jsp">Menu</a></p>
 
 <%
 String conteudo = "JAVA";

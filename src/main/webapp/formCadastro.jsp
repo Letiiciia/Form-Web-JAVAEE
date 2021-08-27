@@ -18,7 +18,6 @@
 </head>
 
 <%
-
 Pessoa p = new Pessoa();
 try {
 
@@ -26,16 +25,14 @@ try {
 	PessoaDao dao = new PessoaDao();
 	p = dao.getPessoa(id);
 } catch (Exception e) {
-	
+
 }
-
-
 %>
 
 
 <body>
 	<form action="cadastroServlet">
-	<input type="hidden" name="id" value="<%=p.getId()%>">
+		<input type="hidden" name="id" value="<%=p.getId()%>">
 		<fieldset>
 			<legend>CADASTRO</legend>
 			<img id="img-java" src="img/java.png" alt="imagem java"> <label
@@ -83,17 +80,19 @@ try {
 		}
 	}
 	
-	document.getElementById("escolaridade").value = "<%=p.getEscolaridade()%>";
-	
-<%  
-	for (String t : p.getTecnologia()) {
-		out.println("document.getElementById('" + t + "').setAttribute('checked', 'checked')");
-	}
-%>
+	document.getElementById("escolaridade").value = "<%=p.getEscolaridade()%>
+		";
+	<%for (String t : p.getTecnologia()) {
+	out.println("document.getElementById('" + t + "').setAttribute('checked', 'checked')");
+}%>
 		
 	</script>
 	<br>
 	<a href="index.jsp" style="float: right;">Index</a>
+	<div id="tb">
+		<%@ include file="listarPessoas.jsp"%>
+
+	</div>
 </body>
 
 </html>

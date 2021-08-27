@@ -50,8 +50,50 @@ input, select {
     color: white;
 }
 
-#img-java{
+#img-java {
     float: right;
     height: 75px;
     width: 90px;
 }
+
+table {
+	width: 50%;
+	margin: auto;
+	border: 2px solid blueviolet;
+	color: black;
+}
+
+#estilo-tb {
+	font-family: Arial, helvetica, sans-serif;
+	border-collapse: collapse;
+	color: black;
+	width: 100%;
+}
+
+#estilo-tb td, #estilo-tb th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#estilo-tb tr:nth-child(even) {
+	background-color: #f2f2f2;	
+}
+
+#estilo-tb tr:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+#estilo-tb th {
+	padding-top: 12px;
+	padding-bottom:12px;
+	text-align: left;
+	background-color: blueviolet;
+	color: white;
+}
+
+#tb {
+	width: 50%; 
+	margin: auto;
+}
+
