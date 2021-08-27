@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
+<%@ include file="menu.jsp"%>
 	<fieldset>
 		<form action="loginservlet">
 			<legend>ACESSAR</legend>

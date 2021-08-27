@@ -31,6 +31,7 @@ try {
 
 
 <body>
+<%@ include file="menu.jsp"%>
 	<form action="cadastroServlet">
 		<input type="hidden" name="id" value="<%=p.getId()%>">
 		<fieldset>
@@ -67,8 +68,21 @@ try {
 				<option value="Fundamental">Fundamental</option>
 				<option value="Ensino Médio">Ensino Médio</option>
 				<option value="Superior">Superior</option>
-			</select> <input type="submit" class="bt" value="Enviar"> <input
-				type="reset" class="bt" value="Limpar">
+			</select> <a class="bt" href="formCadastro.jsp">Novo Cadastro</a>
+			<%
+			if (p.getId() > 0) {
+			%>
+			<a class="bt" onclick="confirm('Deseja mesmo apagar?');"
+				href="cadastroServlet?id=<%=p.getId()%>&acao=apagar">Apagar</a>
+			<%
+			} else {
+			%>
+			<input type="reset" class="bt" value="Limpar">
+			<%
+			}
+			%>
+
+			<input type="submit" class="bt" value="Gravar">
 		</fieldset>
 	</form>
 
@@ -80,15 +94,13 @@ try {
 		}
 	}
 	
-	document.getElementById("escolaridade").value = "<%=p.getEscolaridade()%>
-		";
+	document.getElementById("escolaridade").value = "<%=p.getEscolaridade()%>";
 	<%for (String t : p.getTecnologia()) {
 	out.println("document.getElementById('" + t + "').setAttribute('checked', 'checked')");
 }%>
 		
 	</script>
-	<br>
-	<a href="index.jsp" style="float: right;">Index</a>
+	
 	<div id="tb">
 		<%@ include file="listarPessoas.jsp"%>
 

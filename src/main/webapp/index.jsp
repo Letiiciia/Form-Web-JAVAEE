@@ -1,18 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Primeira página JSP</title>
+<meta charset="UTF-8">
+<title>Primeira pagina JSP</title>
 </head>
 <body>
-<h1>Primeira Página JSP</h1>
-<p><a href="menu.jsp">Menu</a></p>
+<%@ include file="menu.jsp"%>
+<h1>Primeira Pagina JSP</h1>
+
 
 <%
 String conteudo = "JAVA";
-out.println("Aqui é um conteúdo em " + conteudo); 
+out.println("Aqui Ã© um conteÃºdo em " + conteudo); 
 %>
 
 </body>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>menu</title>
 <style>
 ul {
 	background-color: #eee;
@@ -35,7 +35,6 @@ li a:hover {
 	<li><a href="login.jsp">Login</a></li>
 	
 </ul>
-<h1>Primeira página da Letícia Lima</h1>
-<p> <a href="listarPessoas.jsp">Listar pessoas</a></p>
+
 </body>
 </html>

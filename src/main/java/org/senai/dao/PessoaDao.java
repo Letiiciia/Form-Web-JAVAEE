@@ -11,11 +11,13 @@ import org.senai.model.Pessoa;
 
 public class PessoaDao {
 	public boolean adicionar(Pessoa objP) {
-
 		String lsTecnologia = "";
-		for (String t : objP.getTecnologia()) {
-			lsTecnologia += t + ",";
+		if(objP.getTecnologia() != null) {		
+			for (String t : objP.getTecnologia()) {
+				lsTecnologia += t + ",";
+			}
 		}
+	
 
 		try {
 			// Conexao c = new Conexao(); // instancia da classe Conexao
