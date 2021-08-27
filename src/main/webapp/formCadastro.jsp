@@ -16,22 +16,27 @@
 }
 </style>
 </head>
-
-<%
-Pessoa p = new Pessoa();
-try {
-
-	int id = Integer.parseInt(request.getParameter("id"));
-	PessoaDao dao = new PessoaDao();
-	p = dao.getPessoa(id);
-} catch (Exception e) {
-
-}
-%>
-
-
 <body>
-<%@ include file="menu.jsp"%>
+	<%@ include file="menu.jsp"%>
+	<%
+	Pessoa usuario = (Pessoa) request.getSession().getAttribute("usuario");
+	boolean verLista = false;
+	if(usuario != null) {
+		out.print(usuario.getNome());
+		verLista = true;
+	}
+	
+	Pessoa p = new Pessoa();
+	try {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		PessoaDao dao = new PessoaDao();
+		p = dao.getPessoa(id);
+	} catch (Exception e) {
+
+	}
+	%>
+
 	<form action="cadastroServlet">
 		<input type="hidden" name="id" value="<%=p.getId()%>">
 		<fieldset>
@@ -100,11 +105,17 @@ try {
 }%>
 		
 	</script>
-	
+	<%
+	if (verLista) {
+	%>
+
 	<div id="tb">
 		<%@ include file="listarPessoas.jsp"%>
-
 	</div>
+
+	<%
+	}
+	%>
 </body>
 
 </html>

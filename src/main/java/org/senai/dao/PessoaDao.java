@@ -145,4 +145,30 @@ public class PessoaDao {
 
 		return false;
 	}
+	
+	public Pessoa validarLogin(String login, String senha) {
+		Pessoa p = new Pessoa();
+		try {
+			Connection cont = Conexao.conectar();
+			PreparedStatement pst = cont.prepareStatement("select * from pessoas where email = '"+login+"' and senha = '"+senha+"'");
+			
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+
+				p.setNome(rs.getString("nomecompleto"));
+				p.setEmail(rs.getString("email"));
+				p.setId(rs.getInt("id"));
+				p.setTelefone(rs.getString("telefone"));
+				p.setDataNascimento(rs.getString("datanascimento"));
+				p.setTecnologia(rs.getString("tecnologia").split(","));
+				p.setEscolaridade(rs.getString("escolaridade"));
+				p.setSexo(rs.getString("sexo"));
+			}
+			cont.close();
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
 }
