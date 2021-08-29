@@ -47,7 +47,7 @@
 				value="<%=p.getDataNascimento()%>"> <label for="email">E-mail:</label>
 			<input class="larguraTexto" type="email" id="email" name="email"
 				value="<%=p.getEmail()%>"> <label>Estado</label>
-				<select id="estado" name="estado">
+				<select id="uf" name="uf">
 				<option>Selecione</option>
 				</select>
 				
@@ -107,7 +107,7 @@
 }%>
 		function acessarApi() {
 			const xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "https://servicodados.ibge.gov.br/api/v1/localidades/estados");
+			xhttp.open("GET", "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome");
 			xhttp.send();
 
 			xhttp.onload = function() {
@@ -119,7 +119,7 @@
 				var nome = dados[i].nome;
 				lsEstados += "<option value= '"+ uf+"'>"+nome+"</option>"
 			}
-			var estado = document.getElementById("estado");
+			var estado = document.getElementById("uf");
 			estado.innerHTML = lsEstados;
 		}
 		
