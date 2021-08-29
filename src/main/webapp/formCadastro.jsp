@@ -19,12 +19,6 @@
 <body>
 	<%@ include file="menu.jsp"%>
 	<%
-	Pessoa usuario = (Pessoa) request.getSession().getAttribute("usuario");
-	boolean verLista = false;
-	if(usuario != null) {
-		out.print(usuario.getNome());
-		verLista = true;
-	}
 	
 	Pessoa p = new Pessoa();
 	try {
@@ -52,7 +46,12 @@
 				id="dtNascimento" name="dt-nascimento"
 				value="<%=p.getDataNascimento()%>"> <label for="email">E-mail:</label>
 			<input class="larguraTexto" type="email" id="email" name="email"
-				value="<%=p.getEmail()%>"> <label for="sexo">Sexo:</label>
+				value="<%=p.getEmail()%>"> <label>Estado</label>
+				<select id="estado" name="estado">
+				<option>Selecione</option>
+				</select>
+				
+				<label for="sexo">Sexo:</label>
 			<div class="bloco-inline">
 				<input type="radio" id="masc" name="sexo" value="m"> <label
 					for="masc"> Masculino</label> <input type="radio" id="fem"
@@ -101,9 +100,34 @@
 	
 	document.getElementById("escolaridade").value = "<%=p.getEscolaridade()%>";
 	<%for (String t : p.getTecnologia()) {
-	out.println("document.getElementById('" + t + "').setAttribute('checked', 'checked')");
+		if((!t.equals(""))){
+			out.println("document.getElementById('" + t + "').setAttribute('checked', 'checked')");
+		}
+	
 }%>
+		function acessarApi() {
+			const xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "https://servicodados.ibge.gov.br/api/v1/localidades/estados");
+			xhttp.send();
+
+			xhttp.onload = function() {
+				var dados = this.responseText;
+			dados = JSON.parse(dados);
+			var lsEstados = "<option value=''>Selecione</option>";
+			for(i in dados) {
+				var uf = dados[i].sigla;
+				var nome = dados[i].nome;
+				lsEstados += "<option value= '"+ uf+"'>"+nome+"</option>"
+			}
+			var estado = document.getElementById("estado");
+			estado.innerHTML = lsEstados;
+		}
 		
+	
+		
+		}
+		
+		acessarApi();
 	</script>
 	<%
 	if (verLista) {

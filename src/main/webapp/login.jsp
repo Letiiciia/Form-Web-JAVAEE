@@ -19,6 +19,16 @@
 				<input class="larguraTexto" type="password" name="senha" id="senha" placeholder="Digite sua senha">
 			<input type="submit" class="bt" value="Acessar">
 		</form>
+	<script>
+	
+	<% 
+	String erro = request.getParameter("erro");
+	if(erro != null) {
+	%>
+	alert("Login ou senha incorretos!");
+	</script>
+	<%} %>
+	
 	</fieldset>
 </body>
 </html>
