@@ -121,13 +121,14 @@
 			}
 			var estado = document.getElementById("uf");
 			estado.innerHTML = lsEstados;
-		}
-		
-	
-		
+			var estado = document.getElementById("uf").value = "<%=p.getUf()%>";
+			
+			}	
 		}
 		
 		acessarApi();
+		
+		
 	</script>
 	<%
 	if (verLista) {
